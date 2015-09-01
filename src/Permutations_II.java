@@ -50,18 +50,19 @@ public class Permutations_II {
             return;
         }
 
+        long previous = Long.MIN_VALUE;
         // use i to loop through all elements in nums
         for (int i=0;i<nums.size();i++) {
             /**
              * skip a number in one of 2 cases
              * 1. when number (i) is  visited
-             * 2. when number (i) is later one of repeating numbers, where all permutations with previous occurrence has
-             * already been added into result (previous occurrence has been removed from list and backtracked already)
+             * 2. when number (i) is as same as number in previous iteration
              */
-            if (visited[i] == 1 || (i!=0 && nums.get(i) == nums.get(i-1) && visited[i-1] == 0)){
+            if (visited[i] == 1 || previous == nums.get(i)){
                 continue;
             }
 
+            previous = nums.get(i);
             list.add(nums.get(i));
             visited[i] = 1;
             helper(result, list, nums, visited);
