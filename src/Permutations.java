@@ -43,7 +43,7 @@ public class Permutations {
             return; // return for backtrack when a new permutation is added into result
         }
 
-        // use i to loop through all elements in S every time
+        // any number could be added into list, so use i to loop through all elements in S every time
         for (int i=0;i<S.size();i++) {
             // make sure each numbers in a permutation are unique
             if (list.contains(S.get(i))) {
