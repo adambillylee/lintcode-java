@@ -1,6 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 /**
  * Created by adamli on 8/31/15.
@@ -17,6 +18,9 @@ public class Permutations {
         // if input is null, return empty result
         if(S == null || S.size()==0)
             return result;
+
+        // make sure all input numbers are sorted
+        Collections.sort(S);
 
         ArrayList<Integer> list = new ArrayList<Integer>();
         helper(result, list, S);
