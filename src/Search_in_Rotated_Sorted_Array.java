@@ -21,9 +21,9 @@ public class Search_in_Rotated_Sorted_Array {
 
             /**
              * mid could be either in 1st or 2nd increasing interval in rotated array
-             * if mid < start, then its in 1st increasing interval of rotated array
+             * if A[start] < A[mid], then its in 1st increasing interval of rotated array
              */
-            if (A[mid] < start) {
+            if (A[start] < A[mid]) {
                 /**
                  * if mid is in first increasing interval, rotated array can be horizontally split into two parts
                  * ALWAYS CHOOSE INCREASING PART AS IF CONDITION, SINCE WE ARE SURE A[START] <= TARGET <= A[MID]
