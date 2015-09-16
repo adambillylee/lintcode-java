@@ -39,7 +39,7 @@ public class Recover_Rotated_Sorted_Array {
     }
 
     public static void main(String args[]) {
-        ArrayList<Integer> A = new ArrayList<>();
+        ArrayList<Integer> A = new ArrayList<Integer>();
         A.add(4);
         A.add(5);
         A.add(1);

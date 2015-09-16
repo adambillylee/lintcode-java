@@ -10,7 +10,7 @@ public class Binary_Tree_Preorder_Traversal {
      * @return: Preorder in ArrayList which contains node values.
      */
     public ArrayList<Integer> preorderTraversal(TreeNode root) {
-        ArrayList<Integer> result = new ArrayList<>();
+        ArrayList<Integer> result = new ArrayList<Integer>();
 
         if (root == null)
             return result;
