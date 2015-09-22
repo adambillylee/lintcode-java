@@ -64,7 +64,7 @@ public class Binary_Tree_Maximum_Path_Sum {
 
         /**
          * calculate max path, could be in left tree or in right tree
-         * max path could be from max path sum (from root to any point in left tree, or to any point in right tree)
+         * max path could be from max path sum (from any point to any point in left tree, or to any point in right tree)
          * OR, the current maxPath (since node value can be 0)
          */
         int maxPath = Math.max(left.maxPath, right.maxPath);
