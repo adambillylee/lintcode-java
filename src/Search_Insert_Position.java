@@ -32,7 +32,7 @@ public class Search_Insert_Position {
 
         /**
          * IF WE ARE LOOKING FOR FIRST INSERT POSITION
-         * after previous loop, we get the very narraw range with start + 1 = end
+         * after previous loop, we get the very narrow range with start + 1 = end
          * now we need to find which one is the exact insert position (start, end or end + 1)
          * insert target into THE POSITION OF THE FIRST NUMBER > TARGET IN A
          */
