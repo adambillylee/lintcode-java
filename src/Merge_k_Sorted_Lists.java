@@ -1,7 +1,7 @@
-import java.util.ArrayList;
-import java.util.Comparator;
+import com.sun.tools.javac.util.*;
+
+import java.util.*;
 import java.util.List;
-import java.util.PriorityQueue;
 
 /**
  * Created by adamli on 10/6/15.
@@ -65,4 +65,94 @@ public class Merge_k_Sorted_Lists {
             return left.val - right.val;
         }
     };
+
+
+    /*****************************************************************************************************
+     * 2X2 merged method
+     */
+
+    public ListNode mergeKListsDuoMerge(List<ListNode> lists) {
+        if (lists == null || lists.size()==0)
+            return null;
+
+        while (lists.size() > 1) {
+            List<ListNode> tmp = new ArrayList<ListNode>();
+
+            for (int i=0; i<lists.size()-1;i+=2) {
+                tmp.add(mergeTwo(lists.get(i), lists.get(i + 1)));
+            }
+
+            if (lists.size() % 2 == 1)
+                tmp.add(lists.get(lists.size()-1));
+
+            lists = tmp;
+        }
+
+        return lists.get(0);
+    }
+
+    public ListNode mergeTwo(ListNode headA, ListNode headB) {
+        ListNode head = new ListNode(0);
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+
+        while(headA != null & headB != null) {
+            if (headA.val < headB.val) {
+                head.next = headA;
+                headA = headA.next;
+            }else {
+                head.next = headB;
+                headB = headB.next;
+            }
+
+            head = head.next;
+        }
+
+        while(headA != null) {
+            head.next = headA;
+            headA = headA.next;
+            head = head.next;
+        }
+
+        while(headB != null) {
+            head.next = headB;
+            headB = headB.next;
+            head = head.next;
+        }
+
+        head.next = null;
+
+        return dummy.next.next;
+    }
+
+    public static void main(String args[]) {
+        ListNode A = new ListNode(1);
+        A.next = new ListNode(3);
+        A.next.next = new ListNode(5);
+        A.next.next.next = null;
+
+        ListNode B = new ListNode(2);
+        B.next = new ListNode(8);
+        B.next.next = new ListNode(10);
+        B.next.next.next = null;
+
+        ListNode C = new ListNode(22);
+        B.next = new ListNode(83);
+        B.next.next = new ListNode(100);
+        B.next.next.next = null;
+
+        Merge_k_Sorted_Lists sol = new Merge_k_Sorted_Lists();
+
+        List<ListNode> lists = new ArrayList<ListNode>();
+        lists.add(A);
+        lists.add(B);
+        lists.add(C);
+
+        ListNode c = sol.mergeKListsDuoMerge(lists);
+
+        while(c != null) {
+            System.out.println(c.val);
+            c = c.next;
+        }
+    }
 }

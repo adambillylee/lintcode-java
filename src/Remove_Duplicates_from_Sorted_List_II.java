@@ -3,7 +3,7 @@
  */
 public class Remove_Duplicates_from_Sorted_List_II {
     /**
-     * @param ListNode head is the head of the linked list
+     * @param head head is the head of the linked list
      * @return: ListNode head of the linked list
      */
     public static ListNode deleteDuplicates(ListNode head) {
