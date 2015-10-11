@@ -36,8 +36,8 @@ public class Reverse_Linked_List_II {
          * connect n to post M
          * since the middle portion is flipped already
          */
-        preM.next = mNode;
-        nNode.next = postN;
+        preM.next = nNode;
+        mNode.next = postN;
 
         return dummy.next;
     }
