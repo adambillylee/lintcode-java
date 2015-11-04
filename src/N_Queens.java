@@ -95,7 +95,7 @@ public class N_Queens {
     }
 
     public static void main (String[] args) {
-        int n = 2;
+        int n = 4;
         N_Queens sol = new N_Queens();
         ArrayList<ArrayList<String>> rst = sol.solveNQueens(n);
         System.out.println();
