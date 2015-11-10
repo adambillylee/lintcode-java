@@ -58,6 +58,10 @@ public class Top_K_Frequent_Words {
 //    }
 
     public String[] topKFrequentWords(String[] words, int k) {
+        String rst[] = new String[k];
+        if (k==0)
+            return rst;
+
         PriorityQueue<HeapNode> heap = new PriorityQueue<HeapNode>(k, new Comparator<HeapNode>() {
             @Override
             public int compare(HeapNode o1, HeapNode o2) {
@@ -95,8 +99,6 @@ public class Top_K_Frequent_Words {
         for(HeapNode node : nodes) {
             heap.offer(node);
         }
-
-        String rst[] = new String[k];
 
         for (int i=0; i<k; i++) {
             String word = heap.poll().word;
