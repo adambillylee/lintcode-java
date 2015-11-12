@@ -10,18 +10,26 @@ public class Hash_Function {
     public int hashCode(char[] key,int HASH_SIZE) {
         int len = key.length;
 
-        long sum = (int)key[key.length-1];
-//        for (int i=len-1; i>=0; i--) {
-//            for (int j=0; j<len;j++) {
-//                int asc = (int)key[j];
-//                sum += asc * Math.pow(33, i);
-//            }
-//        }
+        // initiation: put first key in
+        // remember to use long for overflow control
+        long sum = (int)key[0];
 
-        for (int i=len-2; i>=0; i--) {
-            int asc = (int)key[i];
-            sum += 33 * (sum) + asc;
-            sum %= HASH_SIZE;
+        /**
+         * transitive relationship: for "abcd"
+         * hash = a * 33^3 + b * 33^2 + c * 33 + d
+         *      = ( (33a + b) * 33 + c) * 33 + d)
+         * hash[i+1] = 33 * hash[i] + key[i+1]
+         */
+        for (int i=1; i<len; i++) {
+            // since sum go modded in last iteration, probably not gonna overflow
+            // unless hash_size is crazy
+            sum = 33 * sum;
+
+            // add curr key
+            sum += key[i];
+
+            // mod sum to keep sum in each iteration in control
+            sum = sum % HASH_SIZE;
         }
 
         return (int)sum;
