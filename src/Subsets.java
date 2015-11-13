@@ -1,12 +1,11 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.*;
 
 /**
  * Created by adamli on 9/1/15.
  */
 public class Subsets {
     /**
+     * Recursive
      * @param nums: A set of numbers.
      * @return: A list of lists. All valid subsets.
      */
@@ -38,16 +37,25 @@ public class Subsets {
         // base case: list added into result
         result.add(new ArrayList<Integer>(list));
 
-        // use i to loop through all numbers after position pos in S
-        for (int i=pos;i<nums.length;i++) {
+        for (int i=pos; i<nums.length; i++) {
+            // use i to loop through all numbers after position pos in S
             list.add(nums[i]);
 
             // bring current list recursively and put next number in S into list
-            helper(result, list, nums, i+1);
+            helper(result, list, nums, i + 1);
 
             // backtrack, remove the last number in list, so in next loop a new number will be put in list in the same
             // position
-            list.remove(list.size()-1);
+            list.remove(list.size() - 1);
         }
+    }
+
+
+    public static void main(String[] args) {
+        Subsets sol = new Subsets();
+
+        int num[] = {1,3,4,5};
+
+        System.out.println(sol.subsets(num));
     }
 }
