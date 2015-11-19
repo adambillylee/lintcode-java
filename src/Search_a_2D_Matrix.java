@@ -8,83 +8,67 @@ public class Search_a_2D_Matrix {
      * @return a boolean, indicate whether matrix contains target
      */
     public boolean searchMatrix(int[][] matrix, int target) {
-        // make sure to cover cases of null matrix and null rows
-        if (matrix.length == 0 || matrix[0].length == 0 ||
-                matrix == null || matrix[0] == null)
+        if (matrix == null || matrix.length == 0 ||
+                matrix[0].length == 0)
             return false;
 
-        int num_of_rows = matrix.length;
-        int num_of_cols = matrix[0].length;
+        int numOfRow = matrix.length;
+        int numOfCol = matrix[0].length;
 
-        /**
-         * first binary search: look for row index
-         * start with row 0
-         * end with row (matrix.length - 1)
-         */
-        int start = 0;
-        int end = num_of_rows - 1;
+        // search for startRow and EndRow
+        int startRow = 0;
+        int endRow = numOfRow - 1;
 
-        /**
-         * check first element of all rows
-         * look for a narrow range [start, end]
-         * so that target between matrix[start][0] and matrix[end][0]
-         */
-        while (start + 1 < end) {
-            int mid = (start+end) /2;
+        while (startRow + 1 < endRow) {
+            int midRow = (startRow+endRow)/2;
 
-            if (matrix[mid][0] == target) {
+            if (target==matrix[midRow][0]){
                 return true;
-            }else if (matrix[mid][0] < target) {
-                /**
-                 * if matrix[mid][0] < target, target must be in later rows
-                 * cut [0~mid] rows from search range
-                 */
-                start = mid;
-            }else {
-                /**
-                 * if matrix[mid][0] < target, target must be in upper rows
-                 * cut [mid+1~end] rows from search range
-                 */
-                end = mid;
-            }
-        }
-
-        int x = 0;
-
-        /**
-         * it could be row start or could be row end
-         * if target >= row end first element
-         * it can only be in last row
-         */
-        if (matrix[end][0] <= target){
-            x = end;
-            /**
-             * if target between first element of row [start~end], its in start row
-             */
-        }else if (matrix[start][0] <= target) {
-            x = start;
-        }else{
-             // if not, not found
-            return false;
-        }
-
-        start = 0;
-        end = num_of_cols - 1;
-
-        // same search look for column index
-        while (start + 1 < end) {
-            int mid = (start + end) / 2;
-
-            if (matrix[x][mid] == target) {
-                return true;
-            }else if(matrix[x][mid] < target) {
-                start = mid;
+            }else if(target > matrix[midRow][0]) {
+                startRow = midRow;
             }else{
-                end = mid;
+                endRow = midRow;
             }
         }
 
-        // its either at matrix[row index][start] or matrix[row index][end]
-        return matrix[x][start] == target || matrix[x][end] == target;
+        int row = 0;
+
+        // Figure out the actual row
+        if (target < matrix[startRow][0]
+                || target > matrix[endRow][numOfCol-1]) {
+            return false;
+        }
+
+        if (target < matrix[endRow][0]){
+            row = startRow;
+        }else if (target <= matrix[endRow][numOfCol-1]){
+            row = endRow;
+        }
+
+        // search for startCol and endCol
+        int startCol = 0;
+        int endCol = numOfCol - 1;
+
+        while(startCol + 1 < endCol) {
+            int midCol = (startCol+endCol)/2;
+
+            if (target == matrix[row][midCol]){
+                return true;
+            }else if(target > matrix[row][midCol]){
+                startCol = midCol;
+            }else{
+                endCol = midCol;
+            }
+        }
+
+
+        // figure out the exact col
+        if (target == matrix[row][startCol])
+            return true;
+
+        if (target == matrix[row][endCol])
+            return true;
+
+        return false;
     }
 }

@@ -3,49 +3,52 @@
  */
 public class Search_in_a_Big_Sorted_Array {
     /**
-     * @param A: An integer array
+     * @param reader: ArrayReader where reader.get(k) returns Kth number in input
      * @param target: An integer
      * @return : An integer which is the index of the target number
      */
-    public int searchBigSortedArray(int[] A, int target) {
-        if (A == null || A.length == 0)
+    public int searchBigSortedArray(ArrayReader reader, int target) {
+        if (reader.get(0) == -1)
             return -1;
 
         int start = 0;
         int end = 0;
 
-        // reverse binary search for rough latest end index
-        while (end < A.length && A[end] < target)
+        // find an end to start with
+        while(reader.get(end) != -1 && reader.get(end)<target) {
             end = end * 2 + 1;
+        }
 
-        // modified version of binary search
-        while (start + 1 < end) {
-            int mid = (start + end) / 2;
-
-            /**
-             * since we are looking for first matching index
-             * this mid at worst case could be at the end of a matching sequence
-             * cut [mid+1~end] from search range and keep looking for earlier matches
+        // binary search from start to end, search for target
+        while(start + 1 < end) {
+            int mid = (start+end)/2;
+            /** REMEMBER, WHEN target == mid
+             * LET end = mid INSTEAD OF RETURNING mid DIRECTLY
+             * SINCE WE ARE LOOKING FOR FIRST MATCHING POSITION
+             * NEED TO CONSIDER MULTIPLE TARGET VALUE IN INPUT
              */
-            if (target == A[mid]) {
-                end = mid;
-            }else if (target > A[mid]) {
+            if (target > reader.get(mid)) {
                 start = mid;
-            }else {
+            }else{
                 end = mid;
             }
         }
 
-        /**
-         * since we are looking for first matching index
-         * we check start first, if start matches, we return it first
-         */
-        if (target == A[start]) {
-            return start;
-        }else if (target == A[end]) {
+
+        // figure out its start, end or not at all
+        // ascending order, so start with end
+        if (target == reader.get(end))
             return end;
-        }else{
-            return -1;
-        }
+
+        if (target == reader.get(start))
+            return start;
+
+        return -1;
     }
+}
+
+class ArrayReader{
+    ArrayReader(){};
+
+    public int get(int k){return 0;}
 }

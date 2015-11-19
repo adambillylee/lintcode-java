@@ -55,7 +55,7 @@ public class Permutations_II {
         for (int i=0;i<nums.size();i++) {
             /**
              * skip a number in one of 2 cases
-             * 1. when number (i) is  visited
+             * 1. when number (i) is visited
              * 2. when number (i) is as same as number in previous iteration
              */
             if (visited[i] == 1 || previous == nums.get(i)){
@@ -74,7 +74,7 @@ public class Permutations_II {
              */
             list.remove(list.size()-1);
 
-            // since the permutation is already added into result, fresh vivisted flag for this number
+            // since the permutation is already added into result, fresh visited flag for this number
             visited[i] = 0;
         }
     }

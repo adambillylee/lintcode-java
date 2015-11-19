@@ -10,7 +10,6 @@ import java.util.List;
 public class Subsets_II {
     /**
      * @param S: A set of numbers.
-     * @return: A list of lists. All valid subsets.
      */
     public ArrayList<ArrayList<Integer>> subsetsWithDup(ArrayList<Integer> S) {
         Collections.sort(S);
@@ -55,9 +54,9 @@ public class Subsets_II {
     public static void main(String [] args){
         ArrayList<Integer> S = new ArrayList<Integer>();
         S.add(1);
+        S.add(1);
         S.add(2);
-        S.add(3);
-        S.add(4);
+        S.add(2);
 
         Subsets_II sol = new Subsets_II();
         ArrayList<ArrayList<Integer>> result = sol.subsetsWithDup(S);

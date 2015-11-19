@@ -19,9 +19,6 @@ public class Permutations {
         if(S == null || S.size()==0)
             return result;
 
-        // make sure all input numbers are sorted
-        Collections.sort(S);
-
         ArrayList<Integer> list = new ArrayList<Integer>();
         helper(result, list, S);
 
