@@ -1,10 +1,10 @@
 import java.util.Stack;
 
-public class Queue {
+public class CustomQueue {
     private Stack<Integer> stack1;
     private Stack<Integer> stack2;
 
-    public Queue() {
+    public CustomQueue() {
         // stupid question, remember to initiate stacks
         this.stack1 = new Stack<Integer>();
         this.stack2 = new Stack<Integer>();
