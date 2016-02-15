@@ -8,7 +8,6 @@ import java.util.Collections;
 
 public class Permutations_II {
     /**
-     *
      * @param nums input numbers
      * @return set of unique permutations
      */
@@ -17,7 +16,7 @@ public class Permutations_II {
         ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>(new ArrayList<ArrayList<Integer>>());
 
         // if input is null, return empty result
-        if(nums == null || nums.size()==0)
+        if (nums == null || nums.size() == 0)
             return result;
 
         // make sure all input numbers are sorted
@@ -33,12 +32,11 @@ public class Permutations_II {
     }
 
     /**
-     *
-     * @param result set of unique permutations
-     * @param list  set of number that builds up the current permutation
-     * @param nums  input numbers
-     * @param visited   set of flags that indicate the number in position i is being used in list (visited[i]=1)
-     *                  or not (visited[i]=0)
+     * @param result  set of unique permutations
+     * @param list    set of number that builds up the current permutation
+     * @param nums    input numbers
+     * @param visited set of flags that indicate the number in position i is being used in list (visited[i]=1)
+     *                or not (visited[i]=0)
      */
     public void helper(ArrayList<ArrayList<Integer>> result, ArrayList<Integer> list, ArrayList<Integer> nums,
                        int[] visited) {
@@ -52,13 +50,13 @@ public class Permutations_II {
 
         long previous = Long.MIN_VALUE;
         // use i to loop through all elements in nums
-        for (int i=0;i<nums.size();i++) {
+        for (int i = 0; i < nums.size(); i++) {
             /**
              * skip a number in one of 2 cases
              * 1. when number (i) is visited
              * 2. when number (i) is as same as number in previous iteration
              */
-            if (visited[i] == 1 || previous == nums.get(i)){
+            if (visited[i] == 1 || previous == nums.get(i)) {
                 continue;
             }
 
@@ -72,14 +70,14 @@ public class Permutations_II {
              * remove the very last number from list, so in the next loop iteration,
              * a new number can be added in the same position in the list, to make a new permutation
              */
-            list.remove(list.size()-1);
+            list.remove(list.size() - 1);
 
             // since the permutation is already added into result, fresh visited flag for this number
             visited[i] = 0;
         }
     }
 
-    public static void main(String args []) {
+    public static void main(String args[]) {
         ArrayList S = new ArrayList();
         S.add(1);
         S.add(3);
@@ -87,9 +85,9 @@ public class Permutations_II {
         S.add(7);
 
         Permutations_II sol = new Permutations_II();
-        ArrayList<ArrayList<Integer>> result  = sol.permuteUnique(S);
+        ArrayList<ArrayList<Integer>> result = sol.permuteUnique(S);
 
-        for (int i=0;i<result.size();i++){
+        for (int i = 0; i < result.size(); i++) {
             System.out.println(result.get(i));
         }
     }
