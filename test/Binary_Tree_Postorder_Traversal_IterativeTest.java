@@ -1,6 +1,7 @@
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -16,7 +17,10 @@ public class Binary_Tree_Postorder_Traversal_IterativeTest {
 
         TreeNode root = TreeUtil.getRoot(input);
 
-        ArrayList<Integer> actual = sol.postorderTraversal(root);
-        System.out.println();
+        List<Integer> actual = sol.postorderTraversal(root);
+
+        for (Integer a : actual) {
+            System.out.println(a);
+        }
     }
 }

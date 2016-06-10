@@ -1,33 +1,42 @@
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
  * Created by adamli on 1/25/16.
  */
 public class Binary_Tree_Postorder_Traversal_Iterative {
-    public ArrayList<Integer> postorderTraversal(TreeNode root) {
-        ArrayList<Integer> res = new ArrayList<Integer>();
-        if (root == null) {
-            return res;
+    public static List<Integer> postorderTraversal(TreeNode root) {
+        List<Integer> rst = new ArrayList<>();
+        Stack<TreeNode> stack = new Stack();
+        Stack<TreeNode> visited = new Stack<>();
+
+        while (root != null) {
+            stack.push(root);
+            root = root.left;
         }
-        Stack<TreeNode> stack = new Stack<TreeNode>();
-        stack.push(root);
+
         while (!stack.isEmpty()) {
-            TreeNode temp = stack.peek();
-            if (temp.left == null && temp.right == null) {
-                TreeNode pop = stack.pop();
-                res.add(pop.val);
-            } else {
-                if (temp.right != null) {
-                    stack.push(temp.right);
-                    temp.right = null;
-                }
-                if (temp.left != null) {
-                    stack.push(temp.left);
-                    temp.left = null;
+            TreeNode curr = stack.peek();
+            TreeNode tmp = curr.right;
+
+            if (tmp == null) {
+                rst.add(stack.pop().val);
+            }else{
+                if (!visited.isEmpty() && visited.peek() == curr) {
+                    visited.pop();
+                    rst.add(stack.pop().val);
+                }else{
+                    visited.push(curr);
+
+                    while (tmp != null) {
+                        stack.push(tmp);
+                        tmp = tmp.left;
+                    }
                 }
             }
         }
-        return res;
+
+        return rst;
     }
 }
